@@ -24,7 +24,7 @@ public final class DemoV19 extends V19DeviceTests {
         ui(()->{invoke("changeTheme",new Class[]{int.class},1);stamp();scrollTo(prefix(decor(),"奖章 独立的光"));});scene("medal-insight-dark");
         ui(()->scrollTo(prefix(decor(),"奖章 三日约定")));scene("medal-rhythm-dark");ui(()->choose("奖章 月光守候"));scene("medal-locked-dark");ui(()->((AlertDialog)field(activity,"medalDialog")).dismiss());
         ui(()->scrollTo(prefix(decor(),"奖章 慢慢来也好")));scene("medal-focus-dark");ui(()->{click("统计记录");stamp();});scene("history-dark");
-        ui(()->{click("设置");invoke("changeTheme",new Class[]{int.class},0);stamp();});scene("settings");ui(()->scrollTo(findText(decor(),"关于 EchoSodu")));scene("about");
+        ui(()->{click("设置");invoke("changeTheme",new Class[]{int.class},0);stamp();});scene("settings");ui(()->scrollTo(findText(decor(),"关于 EchoSudoku")));scene("about");
         if(recording){mark("v19-demo-done");waitFor("v19-demo-stop");}ui(()->activity.finish());out.putString("stream","DEMO_V19_SUCCESS: 19 native scenes; sample statistics labeled; no fixture code in release\n");finish(Activity.RESULT_OK,out);
     }catch(Throwable e){out.putString("stream","FAIL "+android.util.Log.getStackTraceString(e));finish(Activity.RESULT_CANCELED,out);}}
 }

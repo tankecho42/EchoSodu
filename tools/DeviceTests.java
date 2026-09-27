@@ -53,7 +53,7 @@ public class DeviceTests extends Instrumentation {
             ok(b.hasAlpha()&&android.graphics.Color.alpha(b.getPixel(0,0))==0&&android.graphics.Color.alpha(b.getPixel(b.getWidth()/2,b.getHeight()/2))>=250,"actual transparent foreground resource "+name);b.recycle();
         }});
         final Object[] homeMascot={null};
-        ui(()->{invoke("navigate",new Class[]{String.class},"home");homeMascot[0]=activity.getWindow().getDecorView().findViewWithTag("echo:0");ok(homeMascot[0]!=null,"daily challenge has peeking crayon Echo");ok(find(activity.getWindow().getDecorView(),"EchoSodu 数独图标")!=null,"home uses Sudoku-primary app artwork");});
+        ui(()->{invoke("navigate",new Class[]{String.class},"home");homeMascot[0]=activity.getWindow().getDecorView().findViewWithTag("echo:0");ok(homeMascot[0]!=null,"daily challenge has peeking crayon Echo");ok(find(activity.getWindow().getDecorView(),"EchoSudoku 数独图标")!=null,"home uses Sudoku-primary app artwork");});
         ui(()->{ok(field(homeMascot[0],"animator")!=null,"visible peeking mascot has gentle motion");View art=(View)homeMascot[0];ViewGroup perch=(ViewGroup)art.getParent();ok(art.getBackground()==null,"mascot has no opaque paper tile background");ok(perch.getClass().getSimpleName().equals("EchoPerchLayout")&&perch.getChildAt(0)==art,"head uses real card depth layout");ok(perch.getChildAt(1).getTop()>art.getTop()&&perch.getChildAt(1).getTop()<art.getBottom(),"card edge overlaps lower portion of mascot");});
         ui(()->invoke("navigate",new Class[]{String.class},"game"));
         ui(()->{ok(!((View)homeMascot[0]).isAttachedToWindow()&&field(homeMascot[0],"animator")==null,"leaving page stops detached mascot animation");View resting=activity.getWindow().getDecorView().findViewWithTag("echo:1");ok(resting!=null&&!resting.isShown()&&field(resting,"animator")==null,"hidden pause mascot consumes no animation");});
@@ -101,7 +101,7 @@ public class DeviceTests extends Instrumentation {
             ok((Boolean)field(game(),"quickMode")&&integer("activeNumber")==5,"quick mode and chosen number persist across recreation");
             invoke("navigate",new Class[]{String.class},"game");ok(find(activity.getWindow().getDecorView(),"快速模式").isSelected(),"restored quick mode reflected in switch");
             View hint=find(activity.getWindow().getDecorView(),"使用提示");ok(hint.getWidth()<activity.getWindow().getDecorView().getWidth()/4,"hint button is compact toolbar item");
-            ok(find(activity.getWindow().getDecorView(),"数独")!=null&&findText(activity.getWindow().getDecorView(),"EchoSodu")!=null,"Sudoku-focused branding visible in game");
+            ok(find(activity.getWindow().getDecorView(),"数独")!=null&&findText(activity.getWindow().getDecorView(),"EchoSudoku")!=null,"Sudoku-focused branding visible in game");
             invoke("start",new Class[]{int.class,boolean.class},0,false);ok((Boolean)field(game(),"quickMode")&&integer("activeNumber")==0,"new game remembers quick preference without stale chosen number");
             int at=empty(),wrong=values("solution")[at]%9+1;click("输入数字 "+wrong);select(at);select(at);select(at);ok(integer("mistakes")==3&&status().equals("lost"),"quick UI third mistake ends game");
         });SystemClock.sleep(1100);

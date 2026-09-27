@@ -1,4 +1,4 @@
-# EchoSodu
+# EchoSudoku
 
 **和 Echo 一起，把下一格想明白。**
 
@@ -22,9 +22,13 @@
 - 六节原生互动教学：可重播演示，也能亲手操作真实棋盘；学习不影响当前局和成绩。
 - 无账号、无广告，核心玩法与教学完全离线。存档可手动导入、导出。
 
+## 名称与兼容性
+
+产品名称已统一为 **EchoSudoku**（数独的标准英文是 Sudoku）。原 GitHub 仓库地址继续有效，旧版本历史记录保持原名。应用 ID、签名、偏好存储和备份文件内部标识不变，旧存档仍可导入；旧设备测试环境变量也继续兼容。
+
 ## 安装
 
-从 [Releases](https://github.com/tankecho42/EchoSodu/releases) 下载 `EchoSodu-1.10.0.apk`。支持 Android 8.0 及以上。
+从 [Releases](https://github.com/tankecho42/EchoSodu/releases) 下载 `EchoSudoku-1.10.1.apk`。支持 Android 8.0 及以上。
 
 官方发布版使用同一签名，可覆盖更新并保留本机进度。卸载会删除本机数据，更换设备前请在设置中导出存档。
 
@@ -53,14 +57,14 @@ export ANDROID_HOME=/path/to/android-sdk
 python3 tools/build_apk.py
 ```
 
-脚本使用本地官方 SDK 工具编译、对齐和签名，输出到 `artifacts/v1.10.0/`。首次运行在本机生成独立签名，私钥不会写入项目；自行构建的签名与官方版不同。
+脚本使用本地官方 SDK 工具编译、对齐和签名，输出到 `artifacts/v1.10.1/`。首次运行在本机生成独立签名，私钥不会写入项目；自行构建的签名与官方版不同。
 
 ### 检查
 
 ```sh
 python3 tools/test_core.py
 # 使用专门的测试模拟器：设备测试会操作该模拟器里的测试数据
-ECHOSODU_ADB_SERIAL=emulator-5556 python3 tools/run_device_tests.py --build-only
+ECHOSUDOKU_ADB_SERIAL=emulator-5556 python3 tools/run_device_tests.py --build-only
 adb -s emulator-5556 shell am instrument -w \
   com.tankecho.zensudoku.tests/.TutorialDeviceTests
 ```
@@ -78,6 +82,6 @@ tools/                         构建、题库与回归测试
 docs/                          架构、素材说明和真实界面截图
 ```
 
-作者：**Tank** · 项目：[tankecho42/EchoSodu](https://github.com/tankecho42/EchoSodu)
+作者：**Tank** · 项目：[EchoSudoku 源码](https://github.com/tankecho42/EchoSodu)
 
 Echo 插画由 ImageGen 生成，界面、棋盘、徽章结构与光效由原生代码绘制。详见 [素材说明](docs/assets.md)。

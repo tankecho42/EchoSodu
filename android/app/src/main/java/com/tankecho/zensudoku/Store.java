@@ -46,6 +46,7 @@ public final class Store {
     private JSONObject snapshot()throws JSONException{JSONObject s=new JSONObject();s.put("records",new JSONObject(records.toString()));s.put("days",new JSONObject(days.toString()));s.put("seen",new JSONObject(seen.toString()));s.put("current",current);s.put("themeId",themeId);s.put("motion",motion);s.put("haptic",haptic);s.put("quickMode",quickMode);s.put("preImport",preImport);return s;}
     public Game load(){try{return current.isEmpty()?null:GameCodec.decode(new JSONObject(current),false);}catch(Exception e){saveError="当前对局无法读取，历史记录仍保留";return null;}}
     public static JSONObject toJson(Game g)throws JSONException{return GameCodec.encode(g);}
+    // Historical backup identifier is stable across the EchoSudoku display-name change.
     public String exportBackup()throws Exception{JSONObject s=snapshot();s.remove("preImport");String payload=s.toString();JSONObject envelope=new JSONObject();envelope.put("app","EchoSodu");envelope.put("version",1);envelope.put("exportedAt",java.time.Instant.now().toString());envelope.put("payload",payload);envelope.put("sha256",digest(payload));return envelope.toString(2);}
     private static String digest(String s)throws Exception{byte[] bytes=MessageDigest.getInstance("SHA-256").digest(s.getBytes(StandardCharsets.UTF_8));StringBuilder h=new StringBuilder();for(byte b:bytes)h.append(String.format(Locale.ROOT,"%02x",b&255));return h.toString();}
     public static JSONObject validateBackup(String text)throws Exception{
